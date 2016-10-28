@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
   root 'pages#home'
-  resource :users, except: :destroy
+  resources :users, except: :destroy
 
 end
