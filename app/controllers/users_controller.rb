@@ -1,5 +1,10 @@
 class UsersController < ApplicationController
 	before_action :logged_in_user, only: [:show]
+	# before_action :admin_user	
+
+	def index
+
+	end
 
 	def new
 		@user = User.new
@@ -29,6 +34,8 @@ class UsersController < ApplicationController
 		@user = User.find(params[:id]) 
 	end
 
+	
+
 	private
 
 	def user_params
@@ -40,5 +47,9 @@ class UsersController < ApplicationController
         flash[:danger] = "Please log in."
         redirect_to login_url
       end
+    end
+
+    def admin_user
+    	resirect_to(root_path) unless current_user.admin?    	
     end
 end
