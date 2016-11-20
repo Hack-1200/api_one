@@ -17,10 +17,11 @@ gem 'grape-entity', '0.4.8'
 gem 'hashie-forbidden_attributes'
 gem 'grape-swagger-rails', '0.2.0'
 gem 'grape-swagger', '0.10.4'
+gem 'pg'
 
 group :development, :test do
   gem 'byebug', platform: :mri
-  gem 'sqlite3'
+  # gem 'sqlite3'
 
 end
 
@@ -38,5 +39,5 @@ group :test do
 end
 
 group :production do
-	gem 'pg'
+
 end
