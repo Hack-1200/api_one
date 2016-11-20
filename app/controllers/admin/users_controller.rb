@@ -1,18 +1,18 @@
 module Admin
 	class UsersController < Admin::ApplicationController
 		before_action :logged_in_user, only: [:show]
-		before_action :admin_user, only: [:index, :destroy]	
+		before_action :admin_user, only: [:index, :destroy]
 
 		def index
 			 	@users=User.all
-				# flash[:success]="Welcome, Admin!"			
+				# flash[:success]="Welcome, Admin!"
 		end
 
 		def new
 			@user = User.new
 		end
 
-		def show 
+		def show
 			# if logged_in? && ((user_id=params[:id]) == current_user.id)
 				@user = User.find(params[:id])
 			# else
@@ -33,7 +33,7 @@ module Admin
 		end
 
 		def edit
-			@user = User.find(params[:id]) 
+			@user = User.find(params[:id])
 		end
 
 		def destroy
@@ -61,8 +61,6 @@ module Admin
 	      end
 	    end
 
-	    def admin_user
-	    	redirect_to(root_path) unless current_user.admin?    	
-	    end
+	    
 	end
 end

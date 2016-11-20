@@ -12,7 +12,11 @@ gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.5'
 gem 'active_model_serializers'
 gem 'bootstrap-sass'
-
+gem 'grape', '0.15.0'
+gem 'grape-entity', '0.4.8'
+gem 'hashie-forbidden_attributes'
+gem 'grape-swagger-rails', '0.2.0'
+gem 'grape-swagger', '0.10.4'
 
 group :development, :test do
   gem 'byebug', platform: :mri

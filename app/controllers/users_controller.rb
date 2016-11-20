@@ -10,7 +10,7 @@ class UsersController < ApplicationController
 		@user = User.new
 	end
 
-	def show 
+	def show
 		# if logged_in? && ((user_id=params[:id]) == current_user.id)
 			@user = User.find(params[:id])
 		# else
@@ -31,10 +31,10 @@ class UsersController < ApplicationController
 	end
 
 	def edit
-		@user = User.find(params[:id]) 
+		@user = User.find(params[:id])
 	end
 
-	
+
 
 	private
 
@@ -50,6 +50,6 @@ class UsersController < ApplicationController
     end
 
     def admin_user
-    	resirect_to(root_path) unless current_user.admin?    	
+    	resirect_to(root_path) unless current_user.admin?
     end
 end
