@@ -22,7 +22,7 @@ gem 'pg'
 group :development, :test do
   gem 'byebug', platform: :mri
   # gem 'sqlite3'
-
+  gem 'pry'
 end
 
 group :development do
