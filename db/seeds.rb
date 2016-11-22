@@ -5,16 +5,16 @@ User.create!(name:  "Example User",
              password_confirmation: "foobar",
              admin: true)
 
-5.times do |n|
-  name  = Faker::Name.name
-  email = "example-#{n+1}@railstutorial.org"
-  password = "password"
-  User.create!(name:  name,
-               email: email,
-               password:              password,
-               password_confirmation: password)
-end
-
+# 5.times do |n|
+#   name  = Faker::Name.name
+#   email = "example-#{n+1}@railstutorial.org"
+#   password = "password"
+#   User.create!(name:  name,
+#                email: email,
+#                password:              password,
+#                password_confirmation: password)
+# end
+#
 sub = ["Математика", "Русский язык", "Информатика", "Физика", "Химия", "Биология", "История", "Обществознание", "Литература", "Английский язык", "География"]
 types = ["A1", "A2", "A3", "A4", "A5", "A6", "A7", "A8", "A9"]
 sub.each do |n|
