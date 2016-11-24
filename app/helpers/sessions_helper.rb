@@ -1,5 +1,6 @@
 module SessionsHelper
 	def log_in(user)
+		session = {}
 		session[:user_id] = user.id
 	end
 
@@ -8,6 +9,15 @@ module SessionsHelper
 	    cookies.permanent.signed[:user_id] = user.id
 	    cookies.permanent[:remember_token] = user.remember_token
   	end
+
+	def dremember(user)
+		user.remember
+		cookies[:user_id] = {value: user.id,
+																expires: 1.week.from_now.utc}
+
+		cookies[:remember_token] = {value: user.remember_token,
+																expires: 1.week.from_now.utc}
+	end
 
 	def current_user
 		if (user_id = session[:user_id])
@@ -19,7 +29,7 @@ module SessionsHelper
 				@current_user = user
 			end
 		end
-	end 
+	end
 
 	def logged_in?
 		!current_user.nil?
