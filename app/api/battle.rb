@@ -1,7 +1,7 @@
 require "./app/helpers/sessions_helper.rb"
 module Battle
   class MyApi < Grape::API
-
+    # include ActionController::Base
     format :json
     prefix :api
     version 'v1'
@@ -31,7 +31,11 @@ module Battle
 
       get ':id' do
         user = User.find(params[:id])
-        # present users, with: Entities::User
+        # data = new Hash()
+        # data = {succes: true, (present user, with: Entities::Userb)}
+        # user.as_json
+        # data.as_json
+        present user, with: Entities::Userb
       end
 
       params do

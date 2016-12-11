@@ -12,7 +12,7 @@ module SessionsHelper
 
 	def dremember(user)
 		user.remember
-		cookies[:user_id] = {value: user.id,
+		cookies.signed[:user_id] = {value: user.id,
 																expires: 1.week.from_now.utc}
 
 		cookies[:remember_token] = {value: user.remember_token,

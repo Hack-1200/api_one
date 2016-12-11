@@ -1,0 +1,23 @@
+<% provide(:title, 'New post') %>
+<h1 class="col-md-offset-5">New Post</h1>
+
+<div class="row">
+  <div class="col-md-8 col-md-offset-2">
+    
+    <%= form_for @post, url: {action: 'create'}  do |f| %>
+      <% cities_array = Subject.all.map { |city| [city.name, city.id] } %>
+      <% tt_array = TaskType.all.map { |city| [city.name, city.id] } %>
+      <%= f.select(:sub_id, cities_array) %>
+      <%= f.select(:lev_id, tt_array) %>
+      <%= f.label :body %>
+      <%= f.text_area :body, size: "60x8" %>
+      <%= f.label :variants %>
+      <%= f.text_area :variants, size: "60x4" %>
+      <%= f.label :answer %>
+      <%= f.text_area :answer , size: "60x1" %>
+      <%= f.submit "Create" %>
+    <% end %>
+
+
+  </div>
+</div>
