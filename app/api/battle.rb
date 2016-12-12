@@ -36,6 +36,8 @@ module Battle
         # user.as_json
         # data.as_json
         present user, with: Entities::Userb
+        # data = Entities::Userb.represent(model, only: [:name, { user: [:id, :email] }])
+        # data.as_json
       end
 
       params do
@@ -49,8 +51,11 @@ module Battle
 
       post do
         user = User.new(declared(params).user)
-        if user.save
-          present user, with: Entities::Userg
+        if user.valid?
+            user.save!
+            present user, with: Entities::Userg
+        else
+            present user, with: Entities::Userb
         end
       end
     end
