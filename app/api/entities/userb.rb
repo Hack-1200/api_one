@@ -21,7 +21,8 @@
               #   expose :updated_at
               # end
               present_collection true, :data
-              expose :data, using: Entities::Userg #, if: lambda { |instance, options| instance.errors.any? }
+              expose :data, using: Entities::Userg, if: lambda { |instance, options| !options[:foo] }
+              expose :data, if: lambda { |instance, options| options[:foo] }
               # present_collection true, :object1  # `collection_name` is optional and defaults to `items`
               # expose :object1, using: Entities::Userg
               # expose :user do |status, op|
@@ -45,7 +46,7 @@
         # end
 
         def anyErrors
-            !object.blank?
+            object && object.blank?
             #  errors ||= myObject.errors.any?
             #  !!errors
         end
@@ -58,6 +59,9 @@
         def code
           1
           # er_code = {}
+        end
+        def data
+
         end
 
         def success

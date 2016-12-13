@@ -25,6 +25,7 @@ module Battle
 
     resource :users do
       get do
+        
         users = User.all
         # present users, with: Entities::Userb
         data = Entities::Userf.represent(users, except: [:items])
@@ -32,12 +33,20 @@ module Battle
       end
 
       get ':id' do
-        user = User.find(params[:id])
+        begin
+          user = User.find(params[:id])
+        rescue
+          user = false
+        end
         # data = new Hash()
         # data = {succes: true, (present user, with: Entities::Userb)}
         # user.as_json
         # data.as_json
-        present user, with: Entities::Userb
+        if user
+          present user, with: Entities::Userb
+        else
+          present user, with: Entities::Userb, foo: "No one user"
+        end
         # data = Entities::Userb.represent(model, only: [:name, { user: [:id, :email] }])
         # data.as_json
       end
