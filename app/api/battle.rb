@@ -27,7 +27,7 @@ module Battle
       get do
         users = User.all
         # present users, with: Entities::Userb
-        data = Entities::Userb.represent(users, except: [:items])
+        data = Entities::Userf.represent(users, except: [:items])
         data.as_json
       end
 
@@ -55,9 +55,9 @@ module Battle
         user = User.new(declared(params).user)
         if user.valid?
             user.save!
-            present user, with: Entities::Userb
+            present user, with: Entities::Userf
         else
-            present user, with: Entities::Userb
+            present user, with: Entities::Userf
         end
       end
     end

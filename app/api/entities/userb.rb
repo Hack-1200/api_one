@@ -45,13 +45,13 @@
         # end
 
         def anyErrors
-            object.blank?
+            !object.blank?
             #  errors ||= myObject.errors.any?
             #  !!errors
         end
 
         def myObject
-              # mmm ||= object
+              mmm ||= object
 
         end
 
