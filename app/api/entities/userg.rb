@@ -6,12 +6,12 @@
         expose :id
         expose :name
         expose :email
-        expose :password
-        expose :password_confirmation
-        with_options(format_with: :iso_timestamp) do
-        expose :created_at
-        expose :updated_at
-        end
+        # expose :password
+        # expose :password_confirmation
+        # with_options(format_with: :iso_timestamp) do
+        # expose :created_at
+        # expose :updated_at
+        # end
       end
     end
   # end
