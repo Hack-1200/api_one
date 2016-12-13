@@ -5,12 +5,12 @@
           format_with(:iso_timestamp) { |dt| dt.iso8601 }
           # :success
           expose :success
-          expose :data do
+          # expose :data do
 
             # unless :anyErrors
             #   nil
             # end
-            if :success
+            # if :success
               # expose :id
               # expose :name
               # expose :email
@@ -20,8 +20,8 @@
               #   expose :created_at
               #   expose :updated_at
               # end
-              present_collection true
-              expose :items, using: Entities::Userg #, if: lambda { |instance, options| instance.errors.any? }
+              present_collection true, :data
+              expose :data, using: Entities::Userg #, if: lambda { |instance, options| instance.errors.any? }
               # present_collection true, :object1  # `collection_name` is optional and defaults to `items`
               # expose :object1, using: Entities::Userg
               # expose :user do |status, op|
@@ -29,8 +29,8 @@
               # present object, with: Entities::Userg
             # else
             #   nil
-            end
-          end
+            # end
+          # end
 
           expose :error do
               expose :code
