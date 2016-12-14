@@ -37,16 +37,10 @@ module Battle
       get ':id' do
         begin
           user = User.find(params[:id])
-          present user, with: Entities::Rhcp
+          present user, with: Entities::Rhcp, option: " "
         rescue
-          user = {
-            succes: false,
-            data:nil,
-            error:{
-              code:3,
-              messsage: "No more users"
-            }
-          }
+          user = {}
+          present user, with: Entities::Rhcp, option: "No more user"
         end
       end
 
@@ -65,19 +59,14 @@ module Battle
 
           if user.valid?
               user.save!
-              present user, with: Entities::Soad
+              present user, with: Entities::Soad, option: " "
           else
-              present user, with: Entities::Soad
+              present user, with: Entities::Soad, option: " "
           end
         rescue
-          user = {
-              success: false,
-              data:nil,
-              error:{
-                code:5,
-                message: "Something goes wrong in server"
-              }
-          }
+          user = {}
+              present user, with: Entities::Soad, option: "Something goes wrong in server"
+
         end
 
       end
@@ -100,11 +89,13 @@ module Battle
             present user, with: Entities::Rhcp, option: " "
           	# redirect_to user
         	else
+            user = {}
             present user, with: Entities::Rhcp, option: "Invalid email/password combination."
         		# flash.now[:danger]="Invalid email/password combination."
         	# 	render 'new'
         	end
         rescue
+          user = {}
           present user, with: Entities::Rhcp, option: "Invalid email/password combination."
 
         end

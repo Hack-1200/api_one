@@ -9,17 +9,26 @@ module Entities
 
     # present_collection true, :data
     expose :object, as: :data, using: Entities::Userg
+    expose :data, if: lambda { |instance, options| errors?}
 
     ###############################  ERROR  #################################
     expose :error do
       expose :code
-      expose :message
+      expose :message, if: lambda { |instance, options| errors? }
     end
 
     private
 
+    def isHash
+      ish ||= (object.class == Hash)
+    end
+
     def errors?
-      object.errors.any?
+      if !isHash
+        object.errors.any? || !options[:option].blank?
+      else
+        !options[:option].blank?
+      end
     end
 
     def success
@@ -32,7 +41,15 @@ module Entities
     end
 
     def message
-      object.errors.full_messages.first
+      if !isHash
+        object.errors.full_messages.first
+      else
+        options[:option]
+      end
+    end
+
+    def data
+
     end
   end
 end
