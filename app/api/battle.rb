@@ -25,30 +25,29 @@ module Battle
 
     resource :users do
       get do
-        
-        users = User.all
-        # present users, with: Entities::Userb
-        data = Entities::Userf.represent(users, except: [:items])
-        data.as_json
+        begin
+          users = User.all
+        rescue
+          users = "Error"
+        end
+        present users, with: Entities::Acdc
+
       end
 
       get ':id' do
         begin
           user = User.find(params[:id])
+          present user, with: Entities::Rhcp
         rescue
-          user = false
+          user = {
+            succes: false,
+            data:nil,
+            error:{
+              code:3,
+              messsage: "No more users"
+            }
+          }
         end
-        # data = new Hash()
-        # data = {succes: true, (present user, with: Entities::Userb)}
-        # user.as_json
-        # data.as_json
-        if user
-          present user, with: Entities::Userb
-        else
-          present user, with: Entities::Userb, foo: "No one user"
-        end
-        # data = Entities::Userb.represent(model, only: [:name, { user: [:id, :email] }])
-        # data.as_json
       end
 
       params do
@@ -61,13 +60,26 @@ module Battle
       end
 
       post do
-        user = User.new(declared(params).user)
-        if user.valid?
-            user.save!
-            present user, with: Entities::Userf
-        else
-            present user, with: Entities::Userf
+        begin
+          user = User.new(declared(params).user)
+
+          if user.valid?
+              user.save!
+              present user, with: Entities::Soad
+          else
+              present user, with: Entities::Soad
+          end
+        rescue
+          user = {
+              success: false,
+              data:nil,
+              error:{
+                code:5,
+                message: "Something goes wrong in server"
+              }
+          }
         end
+
       end
     end
 
@@ -78,20 +90,24 @@ module Battle
           requires :password, type:String
         end
       end
-      # binding.pry
+
       post do
-        # p params
-        # params = declared(params).user
-        user=User.find_by(email: params[:session][:email].downcase)
-      	if user && user.authenticate(params[:session][:password])
-      	log_in(user)
-      	dremember user
-        user
-      	# redirect_to user
-      	else
-      		flash.now[:danger]="Invalid email/password combination."
-      	# 	render 'new'
-      	end
+        begin
+          user=User.find_by(email: params[:session][:email].downcase)
+        	if user && user.authenticate(params[:session][:password])
+          	log_in(user)
+          	dremember user
+            present user, with: Entities::Rhcp, option: " "
+          	# redirect_to user
+        	else
+            present user, with: Entities::Rhcp, option: "Invalid email/password combination."
+        		# flash.now[:danger]="Invalid email/password combination."
+        	# 	render 'new'
+        	end
+        rescue
+          present user, with: Entities::Rhcp, option: "Invalid email/password combination."
+
+        end
       end
     end
     add_swagger_documentation(
